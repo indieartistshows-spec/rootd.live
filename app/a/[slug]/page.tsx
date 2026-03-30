@@ -19,16 +19,7 @@ export default async function ArtistPage({ params }: PageProps) {
   .select("*", { count: "exact", head: true })
   .eq("artist_id", artist.id);
 
-  return (
-    <main>
-      <h1>{artist.name}</h1>
-
-      {count && count > 0 && (
-        <p>{count} people want to see you live</p>
-      )}
-
-      {/* form here */}
-    </main>
+  
 
   if (error || !artist) {
     return (
@@ -180,6 +171,21 @@ export default async function ArtistPage({ params }: PageProps) {
           </span>{" "}
           live.
         </p>
+
+        {count && count > 0 && (
+  <p
+    style={{
+      fontFamily: "'DM Mono', monospace",
+      fontSize: "11px",
+      letterSpacing: "0.15em",
+      textTransform: "uppercase",
+      color: "#DDFF00",
+      marginBottom: "40px",
+    }}
+  >
+    {count} people already in
+  </p>
+)}
 
         {/* Form */}
         <SignalForm artistId={artist.id} />
