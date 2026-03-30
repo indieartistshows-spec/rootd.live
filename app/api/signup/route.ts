@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { data, error } = await supabase
-      .from('artist_signups')
+      .from('artists')
       .insert([{ name, phone, instagram, city, genre, will_share }])
       .select()
 
