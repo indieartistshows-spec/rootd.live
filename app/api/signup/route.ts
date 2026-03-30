@@ -9,6 +9,10 @@ const supabase = createClient(
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
+    const slug =
+  body.name.toLowerCase().replace(/\s+/g, "-") +
+  "-" +
+  body.genre.toLowerCase().replace(/\s+/g, "-");
     const { name, phone, instagram, city, genre, will_share } = body
 
     if (!name || !phone || !instagram || !city || !genre || !will_share) {
@@ -17,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const { data, error } = await supabase
       .from('artists')
-      .insert([{ name, phone, instagram, city, genre, will_share }])
+      .insert([{ name, phone, instagram, city, genre, will_share, slug}])
       .select()
 
     if (error) {
