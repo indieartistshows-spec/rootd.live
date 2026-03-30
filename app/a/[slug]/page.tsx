@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { createClient } from "@/lib/supabase/server";
 import SignalForm from "./SignalForm";
 
@@ -172,7 +174,7 @@ export default async function ArtistPage({ params }: PageProps) {
           live.
         </p>
 
-        {count && count > 0 && (
+        {typeof count === "number" && count > 0 && (
   <p
     style={{
       fontFamily: "'DM Mono', monospace",
