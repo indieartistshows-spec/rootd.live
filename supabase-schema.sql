@@ -1,4 +1,4 @@
--- Run this in your Supabase SQL editor to create the signups table
+-- Run this once in your Supabase SQL editor
 
 create table if not exists artist_signups (
   id          uuid primary key default gen_random_uuid(),
@@ -11,15 +11,14 @@ create table if not exists artist_signups (
   will_share  text not null check (will_share in ('yes', 'maybe', 'unsure'))
 );
 
--- Enable Row Level Security
 alter table artist_signups enable row level security;
 
--- Allow anyone to insert (public form)
+-- Allow public form submissions
 create policy "Anyone can sign up"
   on artist_signups for insert
   with check (true);
 
--- Only authenticated users (you) can read
-create policy "Authenticated users can read signups"
+-- Only you (authenticated) can read signups
+create policy "Authenticated users can read"
   on artist_signups for select
   using (auth.role() = 'authenticated');
