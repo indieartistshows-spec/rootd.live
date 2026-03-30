@@ -16,37 +16,37 @@ export default async function ArtistPage({ params }: PageProps) {
 
   if (error || !artist) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-black text-white">
-        <p className="text-gray-400 text-lg">Artist not found.</p>
+      <main
+        style={{ background: "#0A0A23" }}
+        className="min-h-screen flex items-center justify-center px-8"
+      >
+        <div className="text-center">
+          <p
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontSize: "1.5rem",
+              textTransform: "uppercase" as const,
+              letterSpacing: "0.02em",
+              color: "#FFFFFF",
+              marginBottom: "12px",
+            }}
+          >
+            Artist not found
+          </p>
+          <p
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "11px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase" as const,
+              color: "rgba(255,255,255,0.3)",
+            }}
+          >
+            This link may be invalid or expired
+          </p>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-16">
-      <div className="w-full max-w-md space-y-10">
-
-        {/* Artist info */}
-        <div className="space-y-2">
-          <h1 className="text-5xl font-bold tracking-tight">{artist.name}</h1>
-          <div className="flex gap-3 text-gray-400 text-sm">
-            {artist.genre && <span>{artist.genre}</span>}
-            {artist.genre && artist.city && <span>·</span>}
-            {artist.city && <span>{artist.city}</span>}
-          </div>
-        </div>
-
-        {/* Signal CTA + form */}
-        <div className="space-y-6">
-          <p className="text-xl text-gray-200">
-            Be among the first to see{" "}
-            <span className="text-white font-semibold">{artist.name}</span> live.
-          </p>
-
-          <SignalForm artistId={artist.id} />
-        </div>
-
-      </div>
-    </main>
-  );
-}

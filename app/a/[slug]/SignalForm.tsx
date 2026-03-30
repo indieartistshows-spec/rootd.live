@@ -7,17 +7,40 @@ interface SignalFormProps {
   artistId: string;
 }
 
+const inputStyle: React.CSSProperties = {
+  display: "block",
+  width: "100%",
+  background: "transparent",
+  border: "none",
+  borderBottom: "1px solid rgba(255,255,255,0.15)",
+  padding: "10px 0 12px",
+  fontFamily: "'Space Grotesk', sans-serif",
+  fontSize: "1rem",
+  fontWeight: 300,
+  color: "rgba(255,255,255,0.5)",
+  outline: "none",
+  WebkitAppearance: "none",
+  borderRadius: 0,
+  transition: "border-color 0.2s, color 0.2s",
+  boxSizing: "border-box",
+};
+
 export default function SignalForm({ artistId }: SignalFormProps) {
   const supabase = createClient();
 
-  const [name, setName] = useState("");
-  const [city, setCity] = useState("");
+  const [name, setName]           = useState("");
+  const [city, setCity]           = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading]     = useState(false);
+  const [error, setError]         = useState<string | null>(null);
+  const [focusedField, setFocus]  = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!name.trim() || !city.trim()) {
+      setError("Both fields are required.");
+      return;
+    }
     setLoading(true);
     setError(null);
 
@@ -37,50 +60,27 @@ export default function SignalForm({ artistId }: SignalFormProps) {
 
   if (submitted) {
     return (
-      <p className="text-gray-300 text-base">
-        You&apos;re in.{" "}
-        <span className="text-white font-medium">
-          If this show happens, you&apos;ll be the first to know.
-        </span>
-      </p>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-3">
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3
-                     text-white placeholder-gray-500 text-sm
-                     focus:outline-none focus:border-white/30 transition"
-        />
-        <input
-          type="text"
-          placeholder="Your city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          required
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3
-                     text-white placeholder-gray-500 text-sm
-                     focus:outline-none focus:border-white/30 transition"
-        />
-      </div>
-
-      {error && <p className="text-red-400 text-sm">{error}</p>}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-white text-black font-semibold rounded-lg px-4 py-3
-                   text-sm hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? "Submitting…" : "I'm interested"}
-      </button>
-    </form>
-  );
-}
+      <div style={{ paddingTop: "24px" }}>
+        <div
+          style={{
+            fontFamily: "'Anton', sans-serif",
+            fontSize: "2rem",
+            color: "#DDFF00",
+            marginBottom: "16px",
+            lineHeight: 1,
+          }}
+        >
+          ✦
+        </div>
+        <p
+          style={{
+            fontFamily: "'Anton', sans-serif",
+            fontSize: "2.8rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.02em",
+            color: "#FFFFFF",
+            lineHeight: 0.9,
+            marginBottom: "16px",
+          }}
+        >
+          You&apos;re in.
