@@ -98,7 +98,7 @@ export default function SignalForm({ artistId }: { artistId: string }) {
           cursor: "pointer",
         }}
       >
-        I'm interested
+        WAITING FOR NEXT SHOW
       </button>
     </form>
   );

@@ -26,6 +26,7 @@ export default function HomePage() {
   const [submitted, setDone]    = useState(false)
   const [loading, setLoading]   = useState(false)
   const [error, setError]       = useState('')
+  const [slug, setSlug] = useState('')
 
   const handleSubmit = async () => {
     const { name, phone, instagram, city } = form
@@ -42,7 +43,12 @@ export default function HomePage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Submission failed')
-      setDone(true)
+      const generatedSlug = `${form.name}-${genre === 'other' ? otherGenre : genre}`
+  .toLowerCase()
+  .replace(/\s+/g, '-')
+
+setSlug(generatedSlug)
+setDone(true)
     } catch (e: any) {
       setError(e.message || 'Something went wrong. Try again.')
     } finally {
@@ -102,7 +108,7 @@ export default function HomePage() {
       <div className="form-wrap" id="join">
         <div className="fi">
           <div>
-            <div className="flbl">Join Rootd Live</div>
+            <div className="flbl">Grow with Rootd.Live</div>
             <div className="ftitle">GET YOUR<br />SIGNAL<br /><em>LINK.</em></div>
             <p className="fdesc">Create your signal link. Share it. See real interest.</p>
           </div>
@@ -162,17 +168,33 @@ export default function HomePage() {
               </div>
             ) : (
               <div className="ss show">
-                <div className="sshl">YOU&apos;RE IN.</div>
-                <p className="ssbody">
-                  We&apos;ll send your signal link directly.<br /><br />
-                  The moment you share it — <strong>the numbers start moving.</strong>
-                </p>
-                <div className="ssnext">
-                  <strong>What&apos;s next:</strong><br />
-                  Share on Instagram story + WhatsApp.<br />
-                  Once people show interest, you&apos;ll see real demand.<br />
-                  That&apos;s when things get real.
-                </div>
+                <div className="sshl">YOUR LINK IS LIVE</div>
+
+  <p className="ssbody">
+    Share this with your audience.
+  </p>
+
+  <div style={{
+    background: '#111',
+    padding: '10px',
+    marginTop: '20px',
+    marginBottom: '10px',
+    fontSize: '12px'
+  }}>
+    {`https://rootd.live/a/${slug}`}
+  </div>
+
+  <button
+    onClick={() => navigator.clipboard.writeText(`https://rootd.live/a/${slug}`)}
+    style={{
+      background: '#DDFF00',
+      padding: '10px',
+      border: 'none',
+      cursor: 'pointer'
+    }}
+  >
+    Copy Link
+  </button>
               </div>
             )}
           </div>
