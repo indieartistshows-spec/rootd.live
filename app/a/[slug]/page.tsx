@@ -17,7 +17,7 @@ export default async function ArtistPage({ params }: PageProps) {
     const { count } = await supabase
   .from("fan_signals")
   .select("*", { count: "exact", head: true })
-  .eq("artist_id", artist.id);
+  .eq("artist_id", artist!.id);
 
   
 
