@@ -4,11 +4,11 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const TICKER_ITEMS = ['MUSIC', 'COMEDY', 'SPOKEN WORD', 'POETRY', 'THEATRE']
+const TICKER_ITEMS = ['MUSIC', 'COMEDY', 'POETRY', 'THEATRE']
 const PROOF_ROWS = [
   { num: '52',  city: 'Fans Want You in Mumbai',       genre: 'Independent music · this week',    status: 'stb', label: 'Building ↑', cls: 'pr1' },
   { num: '117', city: 'Fans Ready in Delhi',            genre: 'Stand-up comedy · waiting',        status: 'stw', label: 'Waiting',    cls: 'pr2' },
-  { num: '38',  city: 'People Want You in Bengaluru',   genre: 'Spoken word / poetry · growing',   status: 'stg', label: 'Growing ↑', cls: 'pr3' },
+  { num: '38',  city: 'People Want You in Bengaluru',   genre: 'Poetry · growing',   status: 'stg', label: 'Growing ↑', cls: 'pr3' },
   { num: '8',   city: 'Seats Left · Pune · Nov 14',     genre: 'Theatre · show confirmed',         status: 'stl', label: 'Live Now ✦', cls: 'pr4' },
 ]
 const STEPS = [
@@ -133,7 +133,7 @@ export default function HomePage() {
                     <option value="" disabled>Select your art form</option>
                     <option value="Music">Music</option>
                     <option value="Stand-up Comedy">Stand-up Comedy</option>
-                    <option value="Spoken Word / Poetry">Spoken Word / Poetry</option>
+                    <option value="Poetry">Poetry</option>
                     <option value="Theatre">Theatre</option>
                     <option value="other">Other</option>
                   </select>
