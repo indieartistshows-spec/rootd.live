@@ -185,7 +185,7 @@ export default async function ArtistPage({ params }: PageProps) {
       marginBottom: "40px",
     }}
   >
-    {count} potential audience
+    {count} potential audiences
   </p>
 )}
 
