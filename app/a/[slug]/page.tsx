@@ -1,7 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import SignalForm from "./SignalForm";
 
-export default async function ArtistPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: { slug: string };
+}
+
+export default async function ArtistPage({ params }: PageProps) {
   const supabase = createClient();
 
   const { data: artist, error } = await supabase
@@ -22,17 +26,21 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-16">
       <div className="w-full max-w-md space-y-10">
 
+        {/* Artist info */}
         <div className="space-y-2">
-          <h1 className="text-5xl font-bold">{artist.name}</h1>
-          <div className="text-gray-400 text-sm">
-            {artist.genre} · {artist.city}
+          <h1 className="text-5xl font-bold tracking-tight">{artist.name}</h1>
+          <div className="flex gap-3 text-gray-400 text-sm">
+            {artist.genre && <span>{artist.genre}</span>}
+            {artist.genre && artist.city && <span>·</span>}
+            {artist.city && <span>{artist.city}</span>}
           </div>
         </div>
 
+        {/* Signal CTA + form */}
         <div className="space-y-6">
-          <p className="text-xl">
+          <p className="text-xl text-gray-200">
             Be among the first to see{" "}
-            <span className="font-semibold">{artist.name}</span> live.
+            <span className="text-white font-semibold">{artist.name}</span> live.
           </p>
 
           <SignalForm artistId={artist.id} />
