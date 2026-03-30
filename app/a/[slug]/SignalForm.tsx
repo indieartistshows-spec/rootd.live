@@ -100,6 +100,17 @@ export default function SignalForm({ artistId }: SignalFormProps) {
     );
   }
 
+return (
+    <main>
+      <h1>{artist.name}</h1>
+
+      {count && count > 0 && (
+        <p>{count} people want to see them live</p>
+      )}
+
+      {/* form here */}
+    </main>
+
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
 

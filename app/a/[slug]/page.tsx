@@ -14,6 +14,22 @@ export default async function ArtistPage({ params }: PageProps) {
     .eq("slug", params.slug)
     .single();
 
+    const { count } = await supabase
+  .from("fan_signals")
+  .select("*", { count: "exact", head: true })
+  .eq("artist_id", artist.id);
+
+  return (
+    <main>
+      <h1>{artist.name}</h1>
+
+      {count && count > 0 && (
+        <p>{count} people want to see you live</p>
+      )}
+
+      {/* form here */}
+    </main>
+
   if (error || !artist) {
     return (
       <main
